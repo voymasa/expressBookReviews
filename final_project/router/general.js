@@ -39,10 +39,8 @@ public_users.get('/author/:author',function (req, res) {
   //get keys
   // iterate and find author
   const keys = Object.keys(books);
-  console.log(keys);
 
   for(let key in keys) {
-    console.log(key);
     if(books[parseInt(keys[key])].author === author) {
       return res.status(200).send(JSON.stringify(
         books[keys[key]],
@@ -58,7 +56,19 @@ public_users.get('/author/:author',function (req, res) {
 // Get all books based on title
 public_users.get('/title/:title',function (req, res) {
   //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+  const title = req.params.title;
+  for(let [key, value] of Object.entries(books))
+  {
+    if(value.title === title) {
+      return res.status(200).send(JSON.stringify(
+        books[key],
+        null,
+        4
+      ));
+    }
+  }
+
+  return res.status(404).json({message: "No book by that title"});
 });
 
 //  Get book review
