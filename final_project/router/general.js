@@ -107,7 +107,7 @@ public_users.get('/review/:isbn',function (req, res) {
   let review = books[isbn].reviews;
   if(review) {
     return res.status(200).send(JSON.stringify(
-      review,
+      {review},
       null,
       4
     ));
